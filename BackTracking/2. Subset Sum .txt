@@ -1,0 +1,24 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3};
+        int target = 3;
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> sub = new ArrayList<>();
+        Sum(0,arr,sub,list,target,0);
+        System.out.println(list);
+    }
+    public static void Sum(int index,int arr[],List<Integer> sub,List<List<Integer>> list,int target,int sum){
+        if(index == arr.length){
+            if(sum == target){
+                list.add(new ArrayList<>(sub));
+                return;
+            }
+            return;
+        }
+        Sum(index+1,arr,sub,list,target,sum);
+        sub.add(arr[index]);
+        Sum(index+1,arr,sub,list,target,sum+arr[index]);
+        sub.remove(sub.size()-1);
+    }
+}

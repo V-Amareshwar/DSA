@@ -1,0 +1,43 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int n = 6;
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        graph.get(0).add(1);
+        graph.get(1).add(2);
+        graph.get(2).add(3);
+        graph.get(3).add(1); // <-- back edge creates cycle (1 → 2 → 3 → 1)
+        graph.get(3).add(4);
+        graph.get(4).add(5);
+        for(int i=0;i<n;i++){
+            System.out.println(graph.get(i));
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        boolean visited[] = new boolean[n];
+        queue.add(0);
+        visited[0] = true;
+        int flag = 0;
+        outer:while(!queue.isEmpty()){
+            int node = queue.poll();
+            for(int neighbours : graph.get(node)){
+                if(!visited[neighbours]){
+                    visited[neighbours] = true;
+                    queue.add(neighbours);
+                }
+                else if(visited[neighbours]){
+                    flag = 1;
+                    break outer;
+                }
+            }
+        }
+        if(flag == 1){
+            System.out.println("Directed Graph is Cyclic");
+        }
+        else{
+            System.out.println("Directed Graph is not Cyclic");
+        }
+    }
+}

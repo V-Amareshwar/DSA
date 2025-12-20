@@ -1,0 +1,47 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,-1,4,5,-1,-1,6};
+        Node root = tree(arr,0);
+        // System.out.println(Height(root));
+        // LonelyNode(root);
+        System.out.println(Min(root));
+    }
+    public static Node tree(int arr[] ,int i){
+        if(i>=arr.length){
+            return null;
+        }
+        if(arr[i]==-1){
+            return null;
+        }
+        Node root = new Node(arr[i]);
+        root.left = tree(arr,2*i+1);
+        root.right = tree(arr,2*i+2);
+        return root;
+    }
+    public static int Min(Node root){
+        if(root == null){
+            return 0;
+        }
+        if(root.left ==null && root.right == null){
+            return 1;
+        }
+        int l = Min(root.left);
+        int r = Min(root.right);
+        if(root.left==null){
+            return r+1;
+        }
+        if(root.right == null){
+            return l+1;
+        }
+        return 1+Math.min(l,r);
+    }
+}
+class Node{
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data = data;
+        left = right = null;
+    }
+}

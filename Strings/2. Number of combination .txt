@@ -1,0 +1,19 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String s = "aaa";
+        HashSet<String> set = new HashSet<>();
+        combination("",s,set);
+        System.out.println(set);
+    }
+    public static void combination(String k,String s,HashSet<String> set){
+        if(s.isEmpty()){
+            // System.out.println(k);
+            set.add(k);
+            return;
+        }
+        combination(k,s.substring(1),set);
+        combination(k+s.charAt(0),s.substring(1),set);
+        // combination(k,s.substring(1));
+    }
+}

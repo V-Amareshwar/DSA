@@ -1,0 +1,59 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        List<List<Integer>> graph = new ArrayList<>();
+        int n =4;
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        graph.get(0).add(1);
+        graph.get(0).add(2);
+        graph.get(1).add(0);
+        graph.get(1).add(2);
+        graph.get(2).add(0);
+        graph.get(2).add(1);
+        graph.get(2).add(3);
+        graph.get(3).add(2);
+        for(int i=0;i<n;i++){
+            System.out.println(graph.get(i));
+        }
+        int flag = 0;
+        Queue<Pair> queue = new LinkedList<>();
+        boolean visited[] = new boolean[n];
+        queue.add(new Pair(0,-1));
+        visited[0] = true;
+        outer:while(!queue.isEmpty()){
+            int node = queue.peek().first;
+            int parent = queue.peek().second;
+            queue.remove();
+            for(int neighbours : graph.get(node)){
+                if(!visited[neighbours]){
+                    visited[neighbours] = true;
+                    queue.add(new Pair(neighbours,node));
+                }
+                else if(visited[neighbours]){
+                    if(parent!=neighbours){
+                        flag = 1;break outer;
+                    }
+                }
+            }
+        }
+        if(flag ==1){
+            System.out.println("Graph is cycle");
+        }
+        else{
+            System.out.println("Graph is not cycle");
+        }
+        
+        
+    }
+}
+
+class Pair{
+    int first;
+    int second;
+    Pair(int first, int second){
+        this.first = first;
+        this.second = second;
+    }
+}

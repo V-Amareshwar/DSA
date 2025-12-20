@@ -1,0 +1,53 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int grid[][] = {{2,1,1},{1,1,1},{1,0,1}};
+        int fresh = 0;
+        Queue<Pair> queue = new LinkedList<>();
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j] == 1){
+                    fresh++;
+                }
+                if(grid[i][j] == 2){
+                    queue.add(new Pair(i,j,0));
+                }
+            }
+        }
+        System.out.println(dfs(queue,grid,fresh));
+    }
+    public static int dfs(Queue<Pair> queue,int grid[][],int fresh){
+        int time = 0;
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            time = Math.max(time,curr.third);
+            for(int i=0;i<delrow.length;i++){
+                int r = delrow[i]+curr.first;
+                int c = delcol[i]+curr.second;
+                if(r>=0&&r<grid.length&&c>=0&&c<grid[0].length){
+                    if(grid[r][c] == 1){
+                        grid[r][c] =2;
+                        fresh--;
+                        queue.add(new Pair(r,c,time+1));
+                    }
+                }
+            }
+        }
+        if(fresh>0){
+            return -1;
+        }
+        return time;
+    }
+}
+class Pair{
+    int first;
+    int second;
+    int third;
+    Pair(int first,int second,int third){
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+}

@@ -1,0 +1,25 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of vertices");
+        int n = sc.nextInt();  //  These are No.of Vertices
+        System.out.println("Enter number of Edges");
+        int m = sc.nextInt();  // These are No.of Edges
+        
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        System.out.println("Enter vertices and Edges(v,u)");
+        for(int i=0;i<m;i++){
+            int v = sc.nextInt();
+            int u = sc.nextInt();
+            graph.get(v).add(u);
+            graph.get(u).add(v);
+        }
+        for(int i=0;i<n;i++){
+            System.out.println(graph.get(i));
+        }
+    }
+}

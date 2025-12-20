@@ -1,0 +1,46 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3,4,5,6,7};
+        Node root = Tree(arr,0);
+        LevelOrder (root);
+        
+        
+    }public static void LevelOrder(Node root){
+        if(root == null){
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        // System.out.println(root.data);
+        while(!queue.isEmpty()){
+            Node node = queue.poll();
+            System.out.println(node.data);
+            if(node.left!=null){
+                queue.add(node.left);
+                
+            }
+            if(node.right!=null){
+                queue.add(node.right);
+            }
+            
+        }
+    }
+    public static Node Tree(int arr[] ,int i){
+        if(i>=arr.length){
+            return null;
+        }
+        Node root = new Node(arr[i]);
+        root.left = Tree(arr,2*i+1);
+        root.right = Tree(arr,2*i+2);
+        return root;
+    }
+}
+class Node{
+    int data;
+    Node right,left;
+    Node(int data){
+        this.data = data;
+        left = right = null;
+    }
+}

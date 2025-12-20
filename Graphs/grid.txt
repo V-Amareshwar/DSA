@@ -1,0 +1,11 @@
+Step-by-step roadmap:
+
+🔹 Week 1 → Learn matrix basics + direction movement
+
+🔹 Week 2 → Solve DFS/BFS-based problems (Number of Islands, Max Area)
+
+🔹 Week 3 → Solve shortest path problems (Rotting Oranges, Binary Matrix)
+
+🔹 Week 4 → Solve backtracking (Word Search) & DP (Min Path Sum)
+
+🔹 Week 5 → Do 5 hard problems combining BFS + DP + priority queues

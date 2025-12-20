@@ -1,0 +1,53 @@
+// Q1. Given a binary matrix with 0 = empty & 1 = blocked, find the shortest path length from top-left to bottom-right using BFS.
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int grid[][] = {{0,0,0},
+                        {0,1,0},
+                        {1,1,0}
+                       };
+    System.out.println(path(grid));
+                       
+    }
+    public static int path(int grid[][]){
+        int m = grid.length;
+        int n = grid[0].length;
+        if(grid.length<1 || grid[0][0] ==1 || grid[m-1][n-1] == 1){
+            return -1;
+        }
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(0,0,0));
+        grid[0][0] = 1;
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            if(curr.first == m-1 && curr.second == n-1){
+                return curr.third;
+            }
+            for(int i=0;i<delrow.length;i++){
+                int r = delrow[i]+curr.first;
+                int c = delcol[i]+curr.second;
+                if(r>=0 && r<m && c>=0 && c<n){
+                    if(grid[r][c]==0){
+                        queue.add(new Pair(r,c,curr.third+1));
+                        grid[r][c] = 1;
+                    }
+                    
+                }
+                
+            }
+        }
+        return -1;
+    }
+}
+class Pair{
+    int first,second,third;
+    Pair(int first,int second,int third){
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+}

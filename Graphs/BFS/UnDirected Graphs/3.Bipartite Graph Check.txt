@@ -1,0 +1,47 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int n = 4;
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        graph.get(0).add(1);
+        graph.get(0).add(3);
+        graph.get(1).add(2);
+        graph.get(1).add(0);
+        graph.get(2).add(1);
+        graph.get(2).add(3);
+        graph.get(3).add(0);
+        graph.get(3).add(2);
+        System.out.println(graph);
+        int color [] = new int [n];
+        for(int i=0;i<n;i++){
+            color[i] = -1;
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        color[0] = 0;
+        int flag = 0;
+        while(!queue.isEmpty()){
+            int node = queue.poll();
+            for(int neighbour : graph.get(node)){
+                if(color[neighbour] == -1){
+                    color[neighbour] = 1-color[node];
+                }
+                if(color[neighbour] == color[node]){
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 1){
+                System.out.println("It is not bipartite");
+                break;
+            }
+        }
+        if(flag == 0){
+            System.out.println("It is bipartite");
+            
+        }
+    }
+}

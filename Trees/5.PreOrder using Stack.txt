@@ -1,0 +1,42 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        int arr [] = {1,2,3,4,5,6,7};
+        Node root = Tree(arr,0);
+        PreOrder(root);
+    }
+    public static void PreOrder(Node root){
+        if(root == null){
+            return ;
+        }
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node node = stack.pop();
+            System.out.println(node.data);
+            if(node.right != null){
+                stack.push(node.right);
+            }
+            if(node.left != null){
+                stack.push(node.left);
+            }
+        }
+    }
+    public static Node Tree(int arr[] , int i){
+        if(i>=arr.length){
+            return null;
+        }
+        Node root = new Node(arr[i]);
+        root.left = Tree(arr,2*i+1);
+        root.right = Tree(arr,2*i+2);
+        return root;
+    }
+}
+class Node {
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data = data;
+        left = right = null;
+    }
+}

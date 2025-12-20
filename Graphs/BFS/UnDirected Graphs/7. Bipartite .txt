@@ -1,0 +1,52 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        List<List<Integer>> graph = new ArrayList<>();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        for(int i=0;i<m;i++){
+            int v = sc.nextInt();
+            int u = sc.nextInt();
+            graph.get(v).add(u);
+            graph.get(u).add(v);
+        }
+        int color[] = new int[n];
+        for(int i=0;i<n;i++){
+            color[i] = -1;
+        }
+        for(int i=0;i<n;i++){
+            if(color[i] == -1){
+                if(bipartite(graph,i,color)){
+                    System.out.println("it is Bipartite");
+                }
+                else{
+                    System.out.println("not Bipartite");
+                }
+            }
+        }
+    }
+    public static boolean bipartite(List<List<Integer>> graph,int j,int color[]){
+        Queue<Integer> queue = new LinkedList<>();
+        // boolean visited[] = new boolean[l.size()];
+        queue.add(j);
+        
+        color[j] = 0;
+        while(!queue.isEmpty()){
+            int node = queue.poll();
+            for(int neighbour : graph.get(node)){
+                if(color[neighbour]==-1){
+                    queue.add(neighbour);
+                    color[neighbour] = 1-color[node];
+                }
+                if(color[neighbour] == color[node]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}

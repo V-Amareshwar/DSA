@@ -1,0 +1,23 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2};
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> sub = new ArrayList<>();
+        subset(0,arr,sub,list);
+        System.out.println(list);
+        System.out.println(sub);
+    }
+    public static void subset(int index,int arr[],List<Integer> sub,List<List<Integer>> list){
+        if(index == arr.length){
+            list.add(new ArrayList<>(sub));
+            System.out.println(sub);
+            return;
+        }
+        subset(index+1,arr,sub,list);
+        sub.add(arr[index]);
+        subset(index+1,arr,sub,list);
+        
+        sub.remove(sub.size()-1);//this line is used to remove the item from list,and list is used to store the item right but when done this with string it not be use right;
+    }
+}

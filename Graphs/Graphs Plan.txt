@@ -1,0 +1,340 @@
+Got it — here’s a **plain-text, copy-ready roadmap** you can paste into a `.txt` file.
+It’s structured, complete (from basics → advanced), and includes **topics, subtopics, practice problem suggestions, typical difficulty, resources, and a 30-day + 60-day study plan**. I kept the format minimal so it’s perfect for a text file.
+
+---
+
+# GRAPH THEORY — COMPLETE LEARNING ROADMAP (copy this into your txt file)
+
+## OVERVIEW
+
+Purpose: Master graphs from fundamentals to advanced competitive / interview level.
+How to use: Follow topics in order. After studying a topic, solve the practice problems listed. Revisit weaker areas.
+Estimated total time: 1–3 months depending on daily practice.
+
+## BASIC NOTATION & REPRESENTATIONS
+
+1. Definitions
+
+   * Vertex (node), edge, degree
+   * Directed vs Undirected
+   * Weighted vs Unweighted
+   * Path, simple path, cycle, loop, parallel edges
+2. Graph types
+
+   * Simple graph, multigraph, complete graph, bipartite graph, tree, DAG, planar graph
+3. Representations
+
+   * Adjacency list (preferred for sparse graphs)
+   * Adjacency matrix (dense graphs)
+   * Edge list
+4. Practice (easy)
+
+   * Implement reading a graph (n, m) into adjacency list
+   * Convert between adjacency list and matrix
+   * Print neighbors of each node
+
+## GRAPH TRAVERSALS
+
+1. Depth First Search (DFS)
+
+   * Recursive DFS
+   * Iterative DFS with stack
+   * Use-cases: component discovery, topological sorting (DFS method), cycle detection
+2. Breadth First Search (BFS)
+
+   * Standard BFS using queue
+   * Level-order on trees / grids
+   * Shortest path in unweighted graphs
+3. Grid BFS / DFS (2D matrix problems)
+
+   * 4-directional vs 8-directional moves
+   * Visited matrix, boundary checks
+4. Practice (easy → medium)
+
+   * Number of connected components
+   * Count islands / Number of islands (grid flood-fill)
+   * BFS shortest path in unweighted grid (shortest steps)
+   * Flood fill
+
+## CYCLE DETECTION
+
+1. Undirected graph
+
+   * DFS with parent tracking
+   * Union-Find (DSU) alternate method
+2. Directed graph
+
+   * DFS with recursion stack (or color array)
+   * Kahn’s algorithm can detect cycle (if topo sort fails)
+3. Practice (easy → medium)
+
+   * Detect cycles in directed/undirected graphs
+   * Use union-find to detect cycle while processing edges
+
+## TOPOLOGICAL SORT
+
+1. Concept: ordering for DAG
+2. Algorithms:
+
+   * DFS-based topological sort (postorder)
+   * Kahn’s algorithm (BFS using in-degree)
+3. Applications:
+
+   * Course scheduling, build systems, dependency resolution
+4. Practice (medium)
+
+   * Course Schedule (topo and detect cycle)
+   * Reconstruct ordering given prerequisites
+
+## SHORTEST PATHS
+
+1. Unweighted graphs: BFS for shortest path (level = distance)
+2. Weighted graphs:
+
+   * Dijkstra (non-negative weights) — priority queue
+   * Bellman-Ford (negative edges allowed, detect negative cycles)
+   * Floyd–Warshall (all-pairs dynamic programming)
+   * 0-1 BFS (edges with weight 0 or 1)
+3. Path reconstruction using parent pointers
+4. Practice (medium → hard)
+
+   * Single-source shortest path with non-negative weights (Dijkstra)
+   * Shortest path with negative edges (Bellman-Ford)
+   * All-pairs small n (Floyd-Warshall)
+   * 0-1 BFS problems
+
+## MINIMUM SPANNING TREE (MST)
+
+1. Definitions & properties
+2. Algorithms:
+
+   * Kruskal (sort edges + DSU)
+   * Prim (priority queue, O(E log V))
+3. DSU (Disjoint Set Union)
+
+   * Union by rank/size
+   * Path compression
+4. Practice (medium)
+
+   * Minimum cost to connect points
+   * Implement DSU and Kruskal
+
+## STRONGLY CONNECTED COMPONENTS (SCC), BRIDGES, ARTICULATION POINTS
+
+1. SCC algorithms:
+
+   * Kosaraju’s (two passes)
+   * Tarjan’s (single pass, low-link values)
+2. Bridges and articulation points (Tarjan low-link)
+3. Practice (medium → hard)
+
+   * Find SCCs and build condensation graph
+   * Find bridges and articulation points
+
+## BIPARTITE GRAPHS & MATCHING
+
+1. Bipartite checking:
+
+   * 2-coloring using BFS/DFS
+2. Matching:
+
+   * Maximum bipartite matching (augmenting paths)
+   * Hopcroft-Karp (faster)
+3. Practice (medium → hard)
+
+   * Bipartite check and maximum matching problems
+
+## FLOW NETWORKS & MAX FLOWS
+
+1. Max flow fundamentals (source, sink, capacities)
+2. Algorithms:
+
+   * Ford-Fulkerson (basic)
+   * Edmonds-Karp (BFS augmentation)
+   * Dinic’s algorithm (level graph + blocking flow)
+3. Applications:
+
+   * Min-cut, bipartite matching via flow, circulation problems
+4. Practice (hard)
+
+   * Max flow on networks, min-cut problems
+
+## ADVANCED / SPECIAL TOPICS
+
+1. Eulerian path/circuit (directed & undirected)
+2. Hamiltonian problems (NP-hard; backtracking)
+3. Tree algorithms:
+
+   * LCA (binary lifting), tree diameter (two BFS), centroid decomposition
+4. Graph compression / condensation graph
+5. Dynamic graph connectivity (advanced)
+6. Graph DP (DP on DAGs)
+7. Persistent DS / offline queries (e.g., divide & conquer tricks)
+8. Practice (hard)
+
+   * LCA implementation and queries
+   * Tree diameter and path queries
+
+## GRIDS, MULTI-SOURCE BFS & SIMULATIONS (Applies to Fire problem)
+
+1. Multi-source BFS (multiple start nodes — push all sources into queue initially)
+2. Simultaneous expansions (fire spread vs person movement)
+3. Time-step simulation: store time when each cell becomes infected/fire
+4. State-space graphs: include extra dimensions (time, key-collection states, remaining health)
+5. Practice (medium → hard)
+
+   * Rotting Oranges (multi-source BFS)
+   * Escape the Fire (simulate fire spread then check person reachability)
+   * Variants: multiple persons, safe zones, obstacles
+
+## COMMON INTERVIEW PATTERNS & TEMPLATES
+
+1. Graph building template (adjacency list)
+2. BFS template (queue, visited, level)
+3. DFS template (recursion + visited)
+4. Multi-source BFS template
+5. DSU template (find with path compression, union by rank)
+6. Priority Queue template for Dijkstra / Prim
+
+## PRACTICE PROBLEM LIST (progressive)
+
+Note: problem names are generic — search them on LeetCode / GeeksForGeeks / Codeforces.
+Beginner / Fundamental (easy)
+
+* Build graph & print adjacency
+* Number of connected components
+* DFS and BFS traversal
+* Number of islands (grid flood fill)
+* Flood fill
+  Intermediate (medium)
+* Shortest path in unweighted graph (BFS)
+* Course schedule (topological sort)
+* Detect cycle in directed/undirected graphs
+* Rotten Oranges (multi-source BFS)
+* Walls and Gates (multi-source BFS)
+* Network Delay Time (Dijkstra)
+* Minimum Spanning Tree problems (MST)
+  Advanced (hard)
+* Escape the Fire / Fire spread + escape
+* Strongly Connected Components (Kosaraju / Tarjan)
+* Bridges & Articulation Points
+* Max Flow / Min Cut problems
+* Advanced shortest path with stops / constraints
+  Competitive / Algorithmic (expert)
+* Hopcroft-Karp bipartite matching
+* Dinic’s max flow
+* Tree centroid decomposition problems
+* Dynamic connectivity / offline queries
+
+## RESOURCES
+
+1. Conceptual / tutorials:
+
+   * GeeksForGeeks — Graph topics & practice
+   * CP-algorithms (e-maxx.ru) — for advanced algorithms (SCC, bridges, flows)
+   * CLRS (for theoretical foundations)
+2. Problem practice:
+
+   * LeetCode (Graph tag)
+   * Codeforces (contest problems; practice implementation & speed)
+   * AtCoder (well-structured contests)
+3. YouTube playlists / lectures:
+
+   * Graph theory & algorithms (search for DFS/BFS, Dijkstra, Tarjan, Dinic)
+4. Tools to implement:
+
+   * Use local IDE (VSCode / IntelliJ) and test on custom testcases
+   * Use online judge (LeetCode / Codeforces)
+
+## TIPS & COMMON PITFALLS
+
+1. Always mark visited when you push into the queue/stack (avoid duplicate pushes).
+2. For large graphs use adjacency lists (memory friendly).
+3. For grid problems, always check boundaries and use visited boolean[][].
+4. Use long for distances if weights can be large.
+5. For Dijkstra, use (distance, node) pairs in PQ and skip stale entries.
+6. For multi-source BFS, push all sources with initial distance = 0.
+7. For DSU, ensure path compression + union by rank for near-constant time.
+8. When reconstructing paths, store parent pointers.
+9. Use 4-direction deltas for grid movement: dx = {1,-1,0,0}; dy = {0,0,1,-1}
+
+## 30-DAY STUDY PLAN (INTENSE) — daily schedule (recommended)
+
+Format: Day — Topic — Practice (set of problems)
+Week 1 — Fundamentals & Traversals
+Day 1: Graph basics + representations — implement adjacency list/matrix
+Day 2: DFS recursive & iterative — problems: connected components, basic DFS
+Day 3: BFS & shortest path in unweighted graph — problems: BFS shortest
+Day 4: Grid DFS/BFS — islands, flood-fill
+Day 5: Cycle detection (undirected) + DSU intro
+Day 6: Cycle detection (directed) + recursion stack
+Day 7: Revision + 5 practice problems
+Week 2 — Topo, Shortest Paths, MST
+Day 8: Topological sort (DFS + Kahn) — course schedule
+Day 9: Dijkstra algorithm — implement + practice
+Day10: Bellman-Ford + negative cycle detection
+Day11: 0-1 BFS + grid shortest path problems
+Day12: MST basics + Kruskal + DSU deep dive
+Day13: Prim’s algorithm + practice
+Day14: Revision + 5 practice problems
+Week 3 — SCCs, Bridges, Articulation
+Day15: Kosaraju’s algorithm — implement
+Day16: Tarjan’s SCC — understand low-link
+Day17: Bridges & articulation points (Tarjan)
+Day18: Eulerian path/circuit theory + practice
+Day19: LCA basics / tree diameter
+Day20: Tree problems + centroid decomposition intro
+Day21: Revision + 5 practice problems
+Week 4 — Advanced / Flow / Contest Prep
+Day22: Bipartite graphs + matching intro
+Day23: Max flow basics — Ford-Fulkerson / Edmonds-Karp
+Day24: Dinic’s algorithm — implement
+Day25: State-space BFS (time dimension) — fire spread / rotting oranges
+Day26: Complex shortest path variants + DP on DAGs
+Day27: Competitive practice set (medium/hard)
+Day28: Mock interview problems (ServiceNow style)
+Day29: Revision of weak topics
+Day30: Full-length contest / timed practice
+
+## 60-DAY PLAN (DEEP DIVE)
+
+* Expand each day to 2 days for deeper practice and more contest problems.
+* Weekends: do a timed contest or 6–8 problems.
+* After 60 days: start doing 2–3 contest/long challenges per week and re-implement templates from scratch.
+
+## PRACTICE STRATEGY & METRICS
+
+1. Daily target: 2–4 problems (mix of easy/medium) or 1 hard problem.
+2. Weekly target: 1 timed contest (Codeforces / LeetCode contest).
+3. Keep a journal of mistakes: why WA, complexity, edge case.
+4. Re-implement templates (DFS, BFS, Dijkstra, DSU) from memory weekly.
+5. After 30 days: start solving random tagged problems to increase exposure.
+
+## TYPICAL INTERVIEW QUESTION STYLES
+
+* Implement BFS/DFS and analyze complexity.
+* Grid problems with multi-source BFS and simulation (rot, fire).
+* Shortest path with constraints (stops, negative weights).
+* MST + DSU problems.
+* SCC / bridges / articulation points explanations and code.
+* Max flow modeling (less frequent but possible for hard rounds).
+
+## COMPLEXITY / ANALYSIS REMINDERS
+
+* BFS/DFS: O(V + E)
+* Dijkstra with PQ: O((V + E) log V)
+* Bellman-Ford: O(V * E)
+* Kruskal: O(E log E) + DSU almost O(α(N))
+* Dinic: O(E * sqrt(V)) approximate (practical fast)
+
+## ENDING NOTES
+
+* Start small and be consistent. Graphs reward repeated implementation and visualization.
+* For the fire / escape problem specifically: learn multi-source BFS and time-layered BFS patterns — they appear often in interviews.
+* If you want, I can convert this into:
+
+  * A printable PDF
+  * A 30-day checklist with checkboxes
+  * A plain file that contains code templates (DFS, BFS, Dijkstra, DSU) ready to paste
+
+Would you like a 30-day checklist file or the code templates next?

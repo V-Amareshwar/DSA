@@ -1,0 +1,39 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+         int arr[] = {1,2,-1,4,5};
+         Node root = tree(arr,0);
+         int l = diameter(root.left);
+         int r = diameter(root.right);
+         System.out.println(l+r+2);
+    }
+    public static int diameter(Node root){
+        if(root == null){
+            return -1;
+        }
+       int l = diameter(root.left);
+       int r = diameter(root.right);
+       return 1+Math.max(l,r);
+        
+    }
+    public static Node tree(int arr[],int i){
+        if(i>=arr.length){
+            return null;
+        }
+        if(arr[i] == -1){
+            return null;
+        }
+        Node root = new Node(arr[i]);
+        root.left = tree(arr,2*i+1);
+        root.right = tree(arr,2*i+2);
+        return root;
+    }
+}
+class Node {
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data = data;
+        left = right = null;
+    }
+}

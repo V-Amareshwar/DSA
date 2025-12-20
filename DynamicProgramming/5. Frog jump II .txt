@@ -1,0 +1,34 @@
+// Here we can move 1 step to k steps , k is No.of steps to move max , n is number of steps with heights as arr[i];
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {15,4,1,14,15};
+        int k = 3;
+        int  n = arr.length;
+        int dp[] = new int[n+1];
+        for(int i=0;i<=n;i++){
+            dp[i] = -1;
+        }
+        System.out.println(frog(n-1,arr,dp,k));
+    }
+    public static int frog(int ind,int arr[],int dp[],int k){
+       int left = Integer.MAX_VALUE;
+        if(ind == 0){
+            return 0;
+        }
+        if(dp[ind] != -1){
+            return dp[ind];
+        }
+        for(int i=1;i<=k;i++){
+            int right = Integer.MAX_VALUE;
+            if(ind-i>=0){
+            right = frog(ind-i,arr,dp,k)+Math.abs(arr[ind]-arr[ind-i]);
+            }
+           left = Math.min(left,right);
+            
+        }
+        return dp[ind] = left;
+        
+    }
+}

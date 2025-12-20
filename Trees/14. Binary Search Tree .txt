@@ -1,0 +1,39 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3,4,5};
+        Node root = null;
+        for(int x : arr){
+            root = insert(root,x);
+        }
+        Inorder(root);
+    }
+    public static void Inorder(Node root){
+        if(root == null){
+            return;
+        }
+        Inorder(root.left);
+        System.out.println(root.data);
+        Inorder(root.right);
+    }
+    public static Node insert(Node root,int val){
+        if(root == null){
+            return new Node(val);
+        }
+        if(val<root.data){
+            root.left = insert(root.left,val);
+        }
+        else{
+            root.right = insert(root.right,val);
+        }
+        return root;
+    }
+}
+class Node {
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data = data;
+        left = right = null;
+    }
+}

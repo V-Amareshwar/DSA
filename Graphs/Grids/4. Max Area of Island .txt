@@ -1,0 +1,58 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+       int [][] grid = {
+                  {0,1,1,0,0},
+                  {1,1,1,0,1},
+                  {0,1,0,0,1},
+                  {0,0,0,1,1}
+                };
+            int n = grid.length;
+    List<Integer> l = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1){
+                    max(grid,i,j,l);
+                }
+            }
+        }
+        int m = 0;
+        for(int i=0;i<l.size();i++){
+            if(l.get(i)>m){
+                m = l.get(i);
+            }
+        }
+        System.out.println(m);
+    }
+    public static void max(int[][] graph,int di,int dj,List<Integer> l){
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(di,dj));
+        graph[di][dj] = 0;
+        int count = 1;
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            for(int i=0;i<delrow.length;i++){
+                int r = delrow[i]+curr.first;
+                int c = delcol[i]+curr.second;
+                if(r>=0 && r<graph.length && c>=0 && c<graph[0].length){
+                    if(graph[r][c] == 1){
+                        queue.add(new Pair(r,c));
+                        graph[r][c] = 0;
+                        count ++;
+                    }
+                }
+            }
+        }
+        l.add(count);
+    }
+}
+class Pair{
+    int first;
+    int second;
+    Pair(int first,int second){
+        this.first = first;
+        this.second = second;
+    }
+}
