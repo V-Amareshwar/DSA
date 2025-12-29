@@ -1,0 +1,26 @@
+// Count subsequences whose sum = K
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3};
+        int k = 3;
+        int sum = 0;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Sum(0,arr,l,list,sum,k);
+        System.out.println(list.size());
+    }
+    public static void Sum(int ind,int arr[],List<Integer> l,List<List<Integer>> list,int sum,int k){
+        if(ind == arr.length){
+            if(sum == k){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        Sum(ind+1,arr,l,list,sum,k);
+        l.add(arr[ind]);
+        Sum(ind+1,arr,l,list,sum+arr[ind],k);
+        l.remove(l.size()-1);
+    }
+}

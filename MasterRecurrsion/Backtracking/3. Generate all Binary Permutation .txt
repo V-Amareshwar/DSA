@@ -1,0 +1,20 @@
+// Output :-
+// [000, 001, 010, 011, 100, 101, 110, 111]
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String s = "000";
+        List<String> l = new ArrayList<>();
+        Binary("",s,l);
+        System.out.println(l);
+    }
+    public static void Binary(String k,String s,List<String> l){
+        if(s.length() == 0){
+            l.add(k);
+            return;
+        }
+        Binary(k+s.charAt(0),s.substring(1),l);
+        Binary(k+'1',s.substring(1),l);
+    }
+}

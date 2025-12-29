@@ -1,0 +1,24 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,2};
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        HashSet<List<Integer>> hash = new HashSet<>();
+        Sub(0,arr,l,list,hash);
+        System.out.println(list);
+    }
+    public static void Sub(int ind,int arr[],List<Integer>l,List<List<Integer>> list,HashSet<List<Integer>> hash){
+        if(ind == arr.length){
+            if(!hash.contains(l)){
+                list.add(new ArrayList<>(l));
+                hash.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        Sub(ind+1,arr,l,list,hash);
+        l.add(arr[ind]);
+        Sub(ind+1,arr,l,list,hash);
+        l.remove(l.size()-1);
+    }
+}

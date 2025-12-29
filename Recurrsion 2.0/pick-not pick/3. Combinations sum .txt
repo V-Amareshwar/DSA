@@ -1,0 +1,35 @@
+// can reuse the number , duplicates sublists are not allowed
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {10,1,2,7,6,1,5};
+        int target = 8;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        HashSet<List<Integer>> hash = new HashSet<>();
+        Sub(0,arr,l,list,target,hash);
+        System.out.println(list);
+    }
+    public static void Sub(int ind,int arr[],List<Integer> l,List<List<Integer>> list ,int target,HashSet<List<Integer>> hash){
+        if(target == 0){
+            if(!hash.contains(l)){
+                hash.add(l);
+                list.add(new ArrayList<>(l));
+            }
+            
+            return;
+        }
+        if(target<0){
+            return;
+        }
+        if(ind == arr.length){
+            return;
+        }
+        l.add(arr[ind]);
+        Sub(ind,arr,l,list,target-arr[ind],hash);
+        l.remove(l.size()-1);
+        Sub(ind+1,arr,l,list,target,hash);
+    }
+}

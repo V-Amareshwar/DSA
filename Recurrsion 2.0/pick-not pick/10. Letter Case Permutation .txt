@@ -1,0 +1,39 @@
+// output
+// a1b
+// a1B
+// A1b
+// A1B
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String s = "a1b";
+        Scanner sc = new Scanner(System.in);
+        char arr[] = s.toCharArray();
+        StringBuilder sb = new StringBuilder(s);
+        // sb.setCharAt(0,'b');
+        // System.out.println("Enter"+ sb.toString());
+        Letter("",s);
+        
+    }
+    public static void Letter(String k,String s){
+        if(s.length() == 0){
+            
+            System.out.println(k);
+            return;
+        }
+        
+        char ch = s.charAt(0);
+        if(Character.isLetter(ch)){
+            ch = Character.toLowerCase(ch);
+           Letter(k+ch,s.substring(1));
+           ch = Character.toUpperCase(ch);
+           Letter(k+ch,s.substring(1));
+        }
+        else{
+            Letter(k+s.charAt(0),s.substring(1));
+        }
+    }
+    
+}

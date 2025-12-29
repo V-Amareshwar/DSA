@@ -1,0 +1,22 @@
+// Print all subsequences without adjacent elements
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3,4};
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        NonAdj(0,arr,l,list);
+        System.out.println(list);
+    }
+    public static void NonAdj(int ind,int arr[],List<Integer> l,List<List<Integer>> list){
+        if(ind >= arr.length){
+            list.add(new ArrayList<>(l));
+            return;
+        }
+        NonAdj(ind+1,arr,l,list);
+        l.add(arr[ind]);
+        NonAdj(ind+2,arr,l,list);
+        l.remove(l.size()-1);
+    }
+}

@@ -1,0 +1,24 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int n = 12;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        dfs(n,2,l,list);
+        System.out.println(list);
+    }
+    public static void dfs(int n,int start,List<Integer> l,List<List<Integer>> list){
+        if(!l.isEmpty()){
+            l.add(n);
+            list.add(new ArrayList<>(l));
+            l.remove(l.size()-1);
+        }
+        for(int i=start;i*i<=n;i++){
+            if(n%i == 0){
+                l.add(i);
+                dfs(n/i,i,l,list);
+                l.remove(l.size()-1);
+            }
+        }
+    }
+}

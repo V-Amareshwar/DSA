@@ -1,0 +1,28 @@
+// Assign + or − to every number so that the final sum equals the given target, and count how many such assignments are possible.
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {0,0,0,0,0};
+        int target = 0;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        targetsum(0,arr,l,list,target,0);
+        System.out.println(list);
+        System.out.println(list.size());
+    }
+    public static void targetsum(int ind,int arr[],List<Integer> l,List<List<Integer>> list , int target,int sum){
+        if(ind == arr.length){
+            if(target == sum){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        l.add(arr[ind]);
+        targetsum(ind+1,arr,l,list,target,sum-arr[ind]);
+        l.remove(l.size()-1);
+        l.add(arr[ind]);
+        targetsum(ind+1,arr,l,list,target,sum+arr[ind]);
+        l.remove(l.size()-1);
+    }
+}

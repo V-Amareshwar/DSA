@@ -1,0 +1,26 @@
+// Print subsequences whose product = K
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3};
+        int k = 3;
+        int product = 1;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Sum(0,arr,l,list,product,k);
+       System.out.println(list);
+    }
+    public static void Sum(int ind,int arr[],List<Integer> l,List<List<Integer>> list,int product,int k){
+        if(ind == arr.length){
+            if(product == k){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        Sum(ind+1,arr,l,list,product,k);
+        l.add(arr[ind]);
+        Sum(ind+1,arr,l,list,product*arr[ind],k);
+        l.remove(l.size()-1);
+    }
+}

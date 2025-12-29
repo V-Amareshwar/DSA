@@ -1,0 +1,19 @@
+// Print all subsequences of a string
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String s = "abc";
+        List<String> l = new ArrayList<>();
+        Subseq("",s,l);
+        System.out.println(l);
+    }
+    public static void Subseq(String k,String s,List<String> l){
+        if(s.length() == 0){
+            l.add(k);
+            return;
+        }
+        Subseq(k,s.substring(1),l);
+        Subseq(k+s.charAt(0),s.substring(1),l);
+    }
+}

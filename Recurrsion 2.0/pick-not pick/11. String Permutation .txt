@@ -1,0 +1,25 @@
+// output :-
+// abc
+// acb
+// bac
+// bca
+// cab
+// cba
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String s = "abc";
+        Permutation("",s);
+    }
+    public static void Permutation(String k,String s){
+        if(s.length() == 0){
+            System.out.println(k);
+            return;
+        }
+        for(int i=0;i<s.length();i++){
+            Permutation(k+s.charAt(i),s.substring(0,i)+s.substring(i+1));
+        }
+    }
+}

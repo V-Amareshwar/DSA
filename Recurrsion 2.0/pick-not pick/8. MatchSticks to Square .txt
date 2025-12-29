@@ -1,0 +1,34 @@
+// matchsticks = [1,1,2,2,2]
+// Total sum = 8 → Each side must be 2
+// Total sum must be divisible by 4
+// AND
+// sticks must be groupable into 4 equal-sum sides
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,1,2,2,2};
+        int side = 0;
+        for(int i=0;i<arr.length;i++){
+            side+=arr[i];
+        }
+        side/=4;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Square(0,arr,l,list,side,0);
+        System.out.println(list);
+    }
+    public static void Square(int ind,int arr[],List<Integer> l,List<List<Integer>> list,int side,int sum){
+        if(ind == arr.length){
+            if(sum == side){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        Square(ind+1,arr,l,list,side,sum);
+        l.add(arr[ind]);
+        Square(ind+1,arr,l,list,side,sum+arr[ind]);
+        l.remove(l.size()-1);
+    }
+}

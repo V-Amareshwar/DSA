@@ -1,0 +1,27 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3};
+        List<Integer> l1 = new ArrayList<>();
+        for(int i : arr){
+            l1.add(i);
+        }
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Permutation(l1,l,list);
+        System.out.println(list);
+    }
+    public static void Permutation(List<Integer> l1,List<Integer> l,List<List<Integer>> list){
+        if(l1.size() == 0){
+            list.add(new ArrayList<>(l));
+            return;
+        }
+        for(int i=0;i<l1.size();i++){
+            List<Integer> k = new ArrayList<>(l1);
+            l.add(k.get(i));
+            k.remove(i);
+            Permutation(k,l,list);
+            l.remove(l.size()-1);
+        }
+    }
+}

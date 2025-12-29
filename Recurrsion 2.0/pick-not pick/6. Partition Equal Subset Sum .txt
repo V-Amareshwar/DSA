@@ -1,0 +1,34 @@
+// Total sum is 18, and the array can be partitioned into [3,3,3] and [4,5], both summing to 9.
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {3,3,3,4,5};
+        int totalsum = 0;
+        for(int i=0;i<arr.length;i++){
+          
+            totalsum += arr[i];
+        }
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        
+        if(totalsum%2 == 0){
+            totalsum/=2;
+            Partition(0,arr,l,list,0,totalsum);
+        }
+        System.out.println(list);
+    }
+    public static void Partition(int ind, int arr[],List<Integer> l,List<List<Integer>> list,int sum,int target){
+        if(ind == arr.length){
+            if(sum == target){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        Partition(ind+1,arr,l,list,sum,target);
+        l.add(arr[ind]);
+        Partition(ind+1,arr,l,list,sum+arr[ind],target);
+        l.remove(l.size()-1);
+        
+    }
+}

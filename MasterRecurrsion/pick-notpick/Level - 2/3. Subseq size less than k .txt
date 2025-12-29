@@ -1,0 +1,25 @@
+// Print all subsequences with at most K elements
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[] = {1,2,3};
+        int k = 1;
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Subseq(0,arr,l,list,k);
+        System.out.println(list);
+    }
+    public static void Subseq(int ind,int arr[],List<Integer> l,List<List<Integer>> list,int k){
+        if(ind == arr.length){
+            if(l.size()<=k){
+                list.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        l.add(arr[ind]);
+        Subseq(ind+1,arr,l,list,k);
+        l.remove(l.size()-1);
+        Subseq(ind+1,arr,l,list,k);
+    }
+}
