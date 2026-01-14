@@ -1,0 +1,72 @@
+// 1 as Island , 0 as water , Then count No.of Islands or Enclaves which are sourrended by water.
+// Output :-
+// 2
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[][] = {{0,0,0,1},
+                       {0,1,0,0},
+                       {0,0,1,0},
+                       {0,0,0,1},
+                       {0,1,1,0}
+        };
+        Queue<Pair> queue = new LinkedList<>();
+        boolean visited[][] = new boolean[arr.length][arr[0].length];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(i==0 && !visited[i][j] && arr[i][j] ==1){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(i==arr.length-1 && !visited[i][j] && arr[i][j] ==1){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(j==0 && !visited[i][j] && arr[i][j] ==1){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(j==arr[0].length-1 && !visited[i][j] && arr[i][j] ==1){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+            }
+        }
+        Island(arr,visited,queue);
+        int count = 0;
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(!visited[i][j] && arr[i][j] == 1){
+                    count++;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+    public static void Island(int arr[][],boolean visited[][],Queue<Pair> queue){
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            for(int i=0;i<delrow.length;i++){
+                int r = delrow[i]+curr.first;
+                int c = delcol[i]+curr.second;
+                if(r>=0&&r<arr.length&&c>=0&&c<arr[0].length){
+                    if(!visited[r][c] && arr[r][c] == 1){
+                        queue.add(new Pair(r,c));
+                        visited[r][c] = true;
+                    }
+                }
+            }
+        }
+        
+    }
+}
+class Pair{
+    int first,second;
+    Pair(int first,int second){
+        this.first = first;
+        this.second = second;
+    }
+}

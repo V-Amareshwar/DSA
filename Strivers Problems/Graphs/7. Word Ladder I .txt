@@ -1,0 +1,47 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        String wordlist[] = {"hot","dot","dog","lot","log","cog"};
+        String beginword = "hit";
+        String endword = "cog";
+        Set<String> set = new HashSet<>();
+        for(int i=0;i<wordlist.length;i++){
+            set.add(wordlist[i]);
+        }
+        System.out.println(Ladder(set,beginword,endword));
+    }
+    public static int Ladder(Set<String> set,String beginword,String endword){
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(beginword,1));
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            if(curr.first.equals(endword)){
+                return curr.second;
+            }
+            Word(curr.first,curr.second,set,queue);
+        }
+        return -1;
+    }
+    public static void Word(String word,int level,Set<String> set,Queue<Pair> queue){
+        StringBuilder s = new StringBuilder(word);
+        for(int i=0;i<word.length();i++){
+            char original = s.charAt(i);
+            for(int j=97;j<=122;j++){
+                s.setCharAt(i,(char)j);
+                if(set.contains(s.toString())){
+                    set.remove(s.toString());
+                    queue.add(new Pair(s.toString(),level+1));
+                }
+            }
+            s.setCharAt(i,original);
+        }
+    }
+}
+class Pair{
+    String first;
+    int second;
+    Pair(String first,int second){
+        this.first = first;
+        this.second = second;
+    }
+}

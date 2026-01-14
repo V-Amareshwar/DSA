@@ -1,0 +1,101 @@
+// Output :-
+// X X X X X 
+// X X X X 0 
+// X X X X 0 
+// X 0 X X X 
+// 0 0 X X X 
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        char arr[][]={{'X','X','X','X','X'},
+                      {'X','0','0','X','0'},
+                      {'X','X','0','X','0'},
+                      {'X','0','X','0','X'},
+                      {'0','0','X','X','X'}
+        };
+        boolean visited[][] = new boolean[arr.length][arr[0].length];
+        Queue<Pair> queue = new LinkedList<>();
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(i==0 && arr[i][j] == '0'&&!visited[i][j]){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(i==arr.length-1 && arr[i][j] == '0'&&!visited[i][j]){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(j==0 && arr[i][j] == '0'&&!visited[i][j]){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+                if(j==arr[0].length-1 && arr[i][j] == '0'&&!visited[i][j]){
+                    queue.add(new Pair(i,j));
+                    visited[i][j] = true;
+                }
+            }
+        }
+        Replace(arr,queue,visited);
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(!visited[i][j]&&arr[i][j] == '0'){
+                    AddX(arr,queue,visited,i,j);
+                }
+            }
+        }
+        // System.out.println(Arrays.deepToString(arr));
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    public static void Replace(char arr[][],Queue<Pair> queue,boolean visited[][]){
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            for(int i=0;i<delrow.length;i++){
+                int r = delrow[i]+curr.first;
+                int c = delcol[i]+curr.second;
+                if(r>=0&&r<arr.length&&c>=0&&c<arr[0].length){
+                    if(arr[r][c] == '0'&&!visited[r][c]){
+                        queue.add(new Pair(r,c));
+                        visited[r][c] = true;
+                    }
+                }
+            }
+        }
+    }
+    public static void AddX(char arr[][],Queue<Pair> queue,boolean visited[][],int i,int j){
+        queue.add(new Pair(i,j));
+        visited[i][j] = true;
+        arr[i][j] = 'X';
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            for(int k=0;k<delrow.length;k++){
+                int r = delrow[k]+curr.first;
+                int c = delcol[k]+curr.second;
+                if(r>=0&&r<arr.length&&c>=0&&c<arr[0].length){
+                    if(arr[r][c] == '0'&&!visited[r][c]){
+                        queue.add(new Pair(r,c));
+                        visited[r][c] = true;
+                        arr[r][c] = 'X';
+                    }
+                }
+            }
+        }
+    }
+}
+class Pair{
+    int first,second;
+    Pair(int first,int second){
+        this.first = first;
+        this.second = second;
+    }
+}

@@ -1,0 +1,57 @@
+// we Should return the No.Of distinct islands are there in given graph
+// Output :-
+// 2
+
+
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        int arr[][] = {{1,1,0,1,1},
+                       {1,0,0,0,0},
+                       {0,0,0,1,1},
+                       {1,1,0,1,0}
+        };
+        boolean visited[][] = new boolean[arr.length][arr[0].length];
+        HashSet<String> hash = new HashSet<>();
+        Queue<Pair> queue = new LinkedList<>();
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(!visited[i][j] && arr[i][j] == 1){
+                    Distinct(arr,queue,hash,visited,i,j);
+                }
+            }
+        }
+        System.out.println(hash.size());
+    }
+    public static void Distinct(int arr[][],Queue<Pair> queue,HashSet<String> hash,boolean visited[][],int i,int j){
+        int delrow[] = {1,-1,0,0};
+        int delcol[] = {0,0,1,-1};
+        queue.add(new Pair(i,j));
+        visited[i][j] = true;
+        String s = "";
+        s = s+String.valueOf(0)+String.valueOf(0);
+        while(!queue.isEmpty()){
+            Pair curr = queue.poll();
+            for(int k=0;k<delrow.length;k++){
+                int r = delrow[k]+curr.first;
+                int c = delcol[k]+curr.second;
+                if(r>=0&&r<arr.length&&c>=0&&c<arr[0].length){
+                    if(!visited[r][c] && arr[r][c]==1){
+                        queue.add(new Pair(r,c));
+                        visited[r][c] = true;
+                        s = s+String.valueOf(r-i)+String.valueOf(c-j);
+                    }
+                }
+            }
+        }
+        
+        hash.add(s);
+    }
+}
+class Pair{
+    int first,second;
+    Pair(int first,int second){
+        this.first = first;
+        this.second = second;
+    }
+}

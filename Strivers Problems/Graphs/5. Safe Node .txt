@@ -1,0 +1,53 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int ver = 12;
+        int edg = 13; 
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<ver;i++){
+            graph.add(new ArrayList<>());
+        }
+        for(int i=0;i<edg;i++){
+            int v = sc.nextInt();
+            int u = sc.nextInt();
+            graph.get(v).add(u);
+        }
+        int visited[] = new int[ver];
+        int pathvis[] = new int[ver];
+        int check[] = new int[ver];
+        for(int i=0;i<ver;i++){
+            if(visited[i] ==0){
+                dfs(i,graph,visited,pathvis,check);
+            }
+        }
+        List<Integer> l = new ArrayList<>();
+        for(int i=0;i<ver;i++){
+            if(check[i] == 1){
+                l.add(i);
+            }
+        }
+        Collections.sort(l);
+        System.out.println(l);
+    }
+    public static boolean dfs(int node,List<List<Integer>> graph,int visited[],int pathvis[],int check[]){
+        visited[node] = 1;
+        pathvis[node] = 1;
+        check[node] = 0;
+        for(int neighbour:graph.get(node)){
+            if(visited[neighbour] == 0){
+                if(dfs(neighbour,graph,visited,pathvis,check)){
+                    // we calling dfs again to check cycle if it is true then we are returning true;
+                    return true;
+                }
+            }
+            else if(pathvis[neighbour] == 1){
+                // we are checking for the cylce formed and path is also same then we are returning true;
+                return true;
+            }
+        }
+        pathvis[node] = 0;
+        check[node] = 1;
+        return false;
+    }
+}
